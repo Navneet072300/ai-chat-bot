@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { useRouter } from "next/navigation"; // Import useRouter
 
 interface CreateProjectProps {
   isOpen: boolean;
@@ -15,6 +16,8 @@ export function CreateProject({
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [projectName, setProjectName] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+
+  const router = useRouter(); // Initialize the router
 
   const languages = [
     "JavaScript",
@@ -86,6 +89,7 @@ export function CreateProject({
               className="w-full bg-green-500 text-white p-2 rounded hover:bg-green-600"
               onClick={() => {
                 onCreate(selectedLanguage, projectName);
+                router.push("/user/create"); // Navigate to the /user/create page
                 onClose();
               }}
               disabled={!selectedLanguage || !projectName}
